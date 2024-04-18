@@ -1,10 +1,11 @@
+import { AddressDraft } from "@commercetools/platform-sdk";
 import * as checkout from "./handson/order";
 import { createPayment } from "./handson/payment";
 import { log } from "./utils/logger";
 
 const customerKey = "tt-customer";
-const cartId = "";
-const orderId = "";
+const cartId = "251d93de-fffb-4af1-802d-2fde3af1f12a";
+const orderId = "727edb15-27d4-453e-a129-7f36f4a9c5d7";
 
 const paymentDraft = {
     key: "payment" + Math.random().toString(36).substring(2, 7),
@@ -18,13 +19,16 @@ const paymentDraft = {
     interactionId: "pay82626" + Math.random()
 }
 
-// create a cart and update the cartId variable
-checkout.createCart(customerKey).then(log).catch(log);
+export const addressDraft: AddressDraft = { country: "DE", city: "Munich" }
 
-// checkout.addLineItemsToCart(cartId, ["tulip-seed-box", "tulip-seed-sack"]).then(log).catch(log);
+// create a cart and update the cartId variable
+// checkout.createCart(customerKey).then(log).catch(log);
+
+// checkout.addLineItemsToCart(cartId, ["GRCG-01", "GRCG-01"]).then(log).catch(log);
 
 // checkout.addDiscountCodeToCart(cartId, "SUMMER").then(log).catch(log);
 // checkout.recalculate(cartId).then(log).catch(log);
+// checkout.addShippingAddressToCart(cartId, addressDraft)
 // checkout.setShippingMethod(cartId).then(log).catch(log);
 
 // create order from cart and update the orderId
@@ -41,11 +45,11 @@ const checkoutProcess = async () => {
     let emptyCart = await checkout.createCart(customerKey);
 
     let filledCart = await checkout.addLineItemsToCart(
-        emptyCart.body.id, ["tulip-seed-box", "tulip-seed-sack"]
+      emptyCart.body.id, ["GRCG-01", "GRCG-01"]
     );
 
     filledCart = await checkout.addDiscountCodeToCart(
-        filledCart.body.id, "SUMMER"
+      filledCart.body.id, "TEST-18"
     );
 
 
@@ -66,4 +70,4 @@ const checkoutProcess = async () => {
     }
 };
 
-// checkoutProcess().then(log).catch(log);
+checkoutProcess().then(log).catch(log);

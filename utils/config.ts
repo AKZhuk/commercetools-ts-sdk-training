@@ -7,7 +7,8 @@ export const enum Prefix {
     IMPORT = "IMPORT",
     STORE = "STORE",
     ME = "ME",
-    AWS = "AWS"
+    AWS = "AWS",
+    CTP = "CTP"
 };
 
 export const readConfig = (prefix: string) => {
